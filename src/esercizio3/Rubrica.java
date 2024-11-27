@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Rubrica {
 
-    private static Map<String, String> contacts = new HashMap<>();
+    private static final Map<String, String> contacts = new HashMap<>();
 
     public static void addContact(String name, String phone) {
         contacts.put(name, phone);
@@ -19,12 +19,19 @@ public class Rubrica {
         for (String name : contacts.keySet()) {
             if (contacts.get(name).equals(phone)) {
                 System.out.println(name + ", " + contacts.get(name));
+                return; // questo return stoppa la ricerca del numero quando lo trova ed esce dal metodo,
+                // sennò continuerebbe a controllare tutte le altre coppie!
             }
         }
+        System.out.println("Contatto non trovato!");
     }
 
     public static void getPhoneByName(String name) {
-        System.out.println(name + ", " + contacts.get(name));
+        if (contacts.get(name) == null) {
+            System.out.println("Contatto non trovato!");
+        } else {
+            System.out.println(name + ", " + contacts.get(name));
+        }
     }
 
     public static void printContacts() {
